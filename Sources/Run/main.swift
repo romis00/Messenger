@@ -1,5 +1,6 @@
 import App
 import Vapor
+import NatsUtilities
 
 var env = try Environment.detect()
 try LoggingSystem.bootstrap(from: &env)

@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import NatsUtilities
 
 func routes(_ app: Application) throws {
     app.get { req in
@@ -9,7 +10,11 @@ func routes(_ app: Application) throws {
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
-
+    
+//    app.get("nat") { req -> String in
+//        return con
+//    }
+    
     let todoController = TodoController()
     app.get("todos", use: todoController.index)
     app.post("todos", use: todoController.create)

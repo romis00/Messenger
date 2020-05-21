@@ -32,10 +32,40 @@ extension Application {
         }
         
         func onOpen(conn: NatsConnection) {
+            
+            var cnt: Int = 0
+            var temp: String = "-------------------------CHECK-------------------------"
+            
             print("OPEN")
+            print(Thread.current.name as Any)
             
-            
-            
+            /*conn.subscribe("Dima", queueGroup: "Home") { msg in
+                msg.reply(payload: Data())
+            }.flatMapThrowing{ _ in
+                self.app.nats.request("Dima", payload: Data(), timeout: 60).flatMapThrowing { msg in
+                    cnt += 1
+                    print(temp)
+                    print(Data())
+                }
+                self.app.nats.publish(temp, payload: Data()).flatMapThrowing { msg in
+                    cnt += 1
+                    print(temp)
+                    print(Data())
+                }
+                self.app.nats.request("Dima", payload: Data(), timeout: 60).flatMapThrowing { msg in
+                    cnt += 1
+                    print(temp)
+                    print(Data())
+                }
+                
+            }*/
+            conn.subscribe("Roman",  queueGroup: "Home") { msg in
+                msg.reply(payload: Data())
+            }
+            self.app.nats.publish(temp, payload: Data())
+            conn.subscribe("Roman",  queueGroup: "Home") { msg in
+                msg.reply(payload: Data())
+            }
         }
         
         func onStreamingOpen(conn: NatsConnection) {
